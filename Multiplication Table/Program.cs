@@ -17,9 +17,17 @@ namespace Multiplication_Table
             int[] threeIncreasingAdjacent = { 23, 48, 19, 20, 21, 45 };
             Console.WriteLine(ThreeIncreasingAdjacent(threeIncreasingAdjacent));
 
+            List<int> numbers = new List<int> { 1, 10, 7, 6, 4, 7, 4 };
+            int result = CheckForSevens(numbers);
+            Console.WriteLine($"The number 7 appears {result} times.");
+
             List<int> primeNumbers = PrimeNumbers(30);
             Console.WriteLine("Prime numbers:");
             Console.WriteLine(string.Join(" ", primeNumbers));
+
+            string input = "This is a ##substring## between hashes.";
+            string extractedSubstring = ExtractSubstringBetweenHashes(input);
+            Console.WriteLine(extractedSubstring);
         }
 
         public static void PrintMultiplicationTable(int size)
@@ -58,6 +66,17 @@ namespace Multiplication_Table
             return false;
         }
 
+
+        static int CheckForSevens(List<int> numbers)
+        {
+            int numberToFind = 7;
+
+            int count = numbers.Count(n => n == numberToFind);
+
+            return count;
+        }
+
+
         static List<int> PrimeNumbers(int number)
         {
             List<int> primeNumbers = new List<int>();
@@ -79,6 +98,25 @@ namespace Multiplication_Table
             }
 
             return primeNumbers;
+        }
+
+        static string ExtractSubstringBetweenHashes(string input)
+        {
+            int startIndex = input.IndexOf("##");
+            if (startIndex == -1)
+            {
+                return string.Empty;
+            }
+
+            startIndex += 2;
+
+            int endIndex = input.IndexOf("##", startIndex);
+            if (endIndex == -1) 
+            {
+                return string.Empty;
+            }
+
+            return input.Substring(startIndex, endIndex - startIndex);
         }
     }
 }
